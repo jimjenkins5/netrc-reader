@@ -1,0 +1,10 @@
+machine example.com
+login something
+password mypassword
+machine oneline.com login oneliner password thisisoneline# # this is a comment
+machine comment.com
+login commentuser # this is another comment
+password commentpassword
+default
+login somethingelse
+password mydefaultpassword

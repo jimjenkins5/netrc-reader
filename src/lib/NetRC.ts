@@ -60,7 +60,7 @@ export class NetRC {
 
    private _parseKeyLine(line: string): ParsedLine | null {
       // 1st group = key, 2nd group = value 3rd group = comment
-      const matches = line.match(/^(password|login|account|macdef)\s+(.*)(\s+#.*|$)/),
+      const matches = line.match(/^(password|login|account|macdef)\s+(.+?(?=\s+#|$))(\s+#)?(.*)?/),
             parsed = { key: '', value: '', comment: '' };
 
       if (!matches || matches.length < 2) {

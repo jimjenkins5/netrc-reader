@@ -13,12 +13,12 @@
    "license": "MIT",
    "repository": {
       "type": "git",
-      "url": "git+https://github.com/jimjenkins5/netrc.git"
+      "url": "git+https://github.com/jimjenkins5/netrc-reader.git"
    },
    "bugs": {
-      "url": "https://github.com/jimjenkins5/netrc/issues"
+      "url": "https://github.com/jimjenkins5/netrc-reader/issues"
    },
-   "homepage": "https://github.com/jimjenkins5/netrc#readme",
+   "homepage": "https://github.com/jimjenkins5/netrc-reader#readme",
    "devDependencies": {
       "@commitlint/cli": "8.3.5",
       "@commitlint/config-conventional": "8.3.4",

@@ -1,10 +1,10 @@
 # netrc-reader
 
 [![NPM Version](https://img.shields.io/npm/v/netrc-reader.svg)](https://www.npmjs.com/package/netrc-reader)
-[![License](https://img.shields.io/github/license/jimjenkins5/netrc.svg)](./LICENSE)
-[![Build Status](https://travis-ci.org/jimjenkins5/netrc.svg?branch=master)](https://travis-ci.org/jimjenkins5/netrc)
-[![Dependency Status](https://david-dm.org/jimjenkins5/netrc.svg)](https://david-dm.org/jimjenkins5/netrc)
-[![Dev Dependency Status](https://david-dm.org/jimjenkins5/netrc/dev-status.svg)](https://david-dm.org/jimjenkins5/netrc#info=devDependencies&view=table)
+[![License](https://img.shields.io/github/license/jimjenkins5/netrc-reader.svg)](./LICENSE)
+[![Build Status](https://travis-ci.org/jimjenkins5/netrc-reader.svg?branch=master)](https://travis-ci.org/jimjenkins5/netrc-reader)
+[![Dependency Status](https://david-dm.org/jimjenkins5/netrc-reader.svg)](https://david-dm.org/jimjenkins5/netrc-reader)
+[![Dev Dependency Status](https://david-dm.org/jimjenkins5/netrc-reader/dev-status.svg)](https://david-dm.org/jimjenkins5/netrc-reader#info=devDependencies&view=table)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 

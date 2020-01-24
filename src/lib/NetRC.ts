@@ -6,15 +6,36 @@ import { promisify } from 'util';
 const readFile = promisify(fs.readFile);
 
 export class NetRC {
+
+   /**
+    * Parsed machine configurations.
+    */
    public machines: MachineCollection = {};
 
+   /**
+    * Raw contents of netrc file.
+    */
    private _fileContents: string = '';
+
+   /**
+    * Path to netrc file.
+    */
    private _filePath: string;
 
+   /**
+    * Constructs new NetRC class.
+    *
+    * @param filePath path to netrc file. Defaults to $HOME/.netrc
+    */
    public constructor(filePath?: string) {
       this._filePath = filePath || this._defaultFile();
    }
 
+   /**
+    * Load and parse the .netrc file. This must be done before using any other functions.
+    *
+    * @param filePath path to netrc file defaults to this._filePath set in constructor.
+    */
    public async load(filePath?: string): Promise<void> {
       if (!filePath) {
          filePath = this._filePath;
@@ -24,6 +45,12 @@ export class NetRC {
       this._parse();
    }
 
+   /**
+    * Retrieve configuration for a specific machine.
+    *
+    * @param machineName name of machine to get configuration for
+    * @returns configuration for the requested machine or null if no machine was found
+    */
    public getConfigForMachine(machineName: string): MachineConfig | null {
       if (this.machines[machineName]) {
          return this.machines[machineName];
@@ -32,6 +59,14 @@ export class NetRC {
       return null;
    }
 
+   /**
+    * Retrieves the configuration for a specific machine falling back to the default
+    * config if available.
+    *
+    * @param machineName name of machine to get configuration for. Empty for default
+    * config
+    * @returns configuration for the requested machine or null if no machine was found
+    */
    public getConfig(machineName?: string): MachineConfig | null {
       let config = null;
 
@@ -46,18 +81,39 @@ export class NetRC {
       return config;
    }
 
+   /**
+    * Checks if supplied line starts a machine machine.
+    *
+    * @param line line to check
+    */
    private _lineIsMachine(line: string): boolean {
       return /^machine/.test(line);
    }
 
+   /**
+    * Checks if supplied line starts a default config.
+    *
+    * @param line line to check
+    */
    private _lineIsDefault(line: string): boolean {
       return /^default/.test(line);
    }
 
+   /**
+    * Checks if supplied line is a full line comment.
+    *
+    * @param line line to check
+    */
    private _lineIsComment(line: string): boolean {
       return /^#/.test(line);
    }
 
+   /**
+    * Parses a key property line.
+    *
+    * @param line line to parse
+    * @returns parsed value or null if unable to parse the line.
+    */
    private _parseKeyLine(line: string): ParsedLine | null {
       // 1st group = key, 2nd group = value 3rd group = comment
       const matches = line.match(/^(password|login|account|macdef)\s+(.+?(?=\s+#|$))(\s+#)?(.*)?/),
@@ -80,12 +136,18 @@ export class NetRC {
       return parsed;
    }
 
+   /**
+    * Gets the default netrc file location for this os.
+    */
    private _defaultFile(): string {
       const home = os.homedir();
 
       return path.join(home, '.netrc');
    }
 
+   /**
+    * Parse the loaded netrc file contents and populate the machines property.
+    */
    private _parse(): void {
       const lines = this._fileContents.split('\n');
 
@@ -134,6 +196,12 @@ export class NetRC {
       });
    }
 
+   /**
+    * Parse a oneline machine config and add values to the specified machine.
+    *
+    * @param words each individual word from the line
+    * @param machineName name of machine to add the parsed properties to.
+    */
    private _addOneLineConfigToMachine(words: string[], machineName: string): void {
       for (let a = 0; a < words.length; a += 2) {
          const key = words[a];
@@ -146,6 +214,12 @@ export class NetRC {
       }
    }
 
+   /**
+    * Parse and add a lines properities to a specified machine.
+    *
+    * @param line line to add
+    * @param machineName machine to add properties to
+    */
    private _addLineToMachine(line: string, machineName: string): void {
       const parsedLine = this._parseKeyLine(line);
 
